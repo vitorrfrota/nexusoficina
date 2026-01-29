@@ -1,11 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Oficina Especializada</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <img src="logo.png" alt="Nexus Oficina" class="logo" />
+
+    <button class="menu-btn" id="menuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- ===== MENU MOBILE ===== -->
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#quem-somos">Quem somos</a>
+    <a href="#localizacao">Como chegar</a>
+  </nav>
+
+  <!-- ===== PARTE 2 | HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-overlay">
+      <h1>Seu carro no melhor lugar</h1>
+      <p>Equipe especializada em reparo de módulo, manutenção automotiva e revisão premium</p>
+
+      <a
+        href="https://wa.me/5521998761020"
+        target="_blank"
+        class="btn-whatsapp"
+      >
+        Converse agora com nossa equipe
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== PARTE 3 | QUEM SOMOS ===== -->
+  <section class="quem-somos" id="quem-somos">
+    <h2>Quem Somos</h2>
+
+    <div class="carousel">
+      <div class="carousel-track">
+        <img src="foto1.jpg" alt="">
+        <img src="foto2.jpg" alt="">
+        <img src="foto3.jpg" alt="">
+        <img src="foto4.jpg" alt="">
+        <img src="foto5.jpg" alt="">
+      </div>
+
+      <div class="carousel-dots">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARTE 4 | SERVIÇOS ===== -->
+  <section class="servicos" id="servicos">
+    <h2>Nossos Serviços</h2>
+
+    <div class="servicos-grid">
+
+      <!-- CARD SERVIÇO -->
+      <div class="servico-card">
+        <img src="servico.jpg" alt="">
+        <h3>Airbag</h3>
+        <p><!-- descrição a preencher --></p>
+      </div>
+
+      <div class="servico-card">
+        <img src="servico.jpg" alt="">
+        <h3>ABS</h3>
+        <p></p>
+      </div>
+
+      <div class="servico-card">
+        <img src="servico.jpg" alt="">
+        <h3>Injeção Eletrônica</h3>
+        <p></p>
+      </div>
+
+      <div class="servico-card">
+        <img src="servico.jpg" alt="">
+        <h3>Diagnóstico Avançado</h3>
+        <p></p>
+      </div>
+
+      <div class="servico-card">
+        <img src="servico.jpg" alt="">
+        <h3>Elétrica em Geral</h3>
+        <p></p>
+      </div>
+
+      <div class="servico-card">
+        <img src="servico.jpg" alt="">
+        <h3>Câmbio Automático</h3>
+        <p></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== PARTE 5 | AVALIAÇÕES ===== -->
+  <section class="avaliacoes">
+    <h2>Avaliações Google</h2>
+
+    <div class="avaliacao-slider">
+      <!-- estrutura pronta para JS -->
+      <div class="avaliacao">★★★★★ Excelente atendimento!</div>
+      <div class="avaliacao">★★★★★ Profissionais de confiança</div>
+      <div class="avaliacao">★★★★★ Serviço rápido e honesto</div>
+    </div>
+
+    <a href="#" class="btn-google">Avaliar no Google</a>
+  </section>
+
+  <!-- ===== WHATSAPP CTA ===== -->
+  <section class="cta-whatsapp">
+    <a href="https://wa.me/5521998761020" target="_blank">
+      Clique aqui e converse agora com nossa equipe
+    </a>
+  </section>
+
+  <!-- ===== LOCALIZAÇÃO ===== -->
+  <section class="localizacao" id="localizacao">
+    <a href="https://maps.google.com" target="_blank">
+      <img src="mapa.jpg" alt="Mapa">
+      <p>Rua Capitão Mário Barbeiro, 540</p>
+    </a>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <img src="logo.png" alt="">
+    <p>WhatsApp: (21) 99876-1020</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
