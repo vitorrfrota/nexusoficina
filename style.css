@@ -91,11 +91,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* CAROUSEL */
-.carousel-track {
-  display: flex;
-  overflow: hidden;
-}
+
 
 /* SERVIÇOS */
 .servicos-grid {
@@ -117,11 +113,10 @@ h2 {
   padding: 20px;
 }
 
-<<<<<<< HEAD
 .logo-footer {
     height: 80px;
 }
-=======
+
 @media (min-width: 768px) {
   /* Esconde o hamburguer */
   .menu-btn {
@@ -197,5 +192,37 @@ h2 {
 
     
 }
+/* ===== QUEM SOMOS - CAROUSEL ===== */
 
->>>>>>> test
+.quem-somos {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+
+
+#carousel-image {
+    width: 300px;
+}
+
+/* Dots */
+#dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dot.active {
+  background: #2ecc71; /* verde Nexus */
+}
