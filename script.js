@@ -37,3 +37,45 @@ updateImage();
 
 
 }, 3000);
+
+//CARROSSEL AVALIAÇÕES
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const track = document.querySelector(".carousel-track");
+  const slides = document.querySelectorAll(".review-slide");
+
+  let currentIndex = 0;
+  let interval;
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
+
+  function nextSlide() {
+    currentIndex++;
+    if (currentIndex >= slides.length) {
+      currentIndex = 0;
+    }
+    updateCarousel();
+  }
+
+  function startCarousel() {
+    interval = setInterval(nextSlide, 4000);
+  }
+
+  function stopCarousel() {
+    clearInterval(interval);
+  }
+
+  // Pausa ao passar o mouse (desktop)
+  track.addEventListener("mouseenter", stopCarousel);
+  track.addEventListener("mouseleave", startCarousel);
+
+  // Pausa ao tocar (mobile)
+  track.addEventListener("touchstart", stopCarousel);
+  track.addEventListener("touchend", startCarousel);
+
+  startCarousel();
+
+});
