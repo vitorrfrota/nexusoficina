@@ -8,6 +8,11 @@
 html, body {
   overflow-x: hidden;
 }
+ p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 16px;
+ }
 
 body {
   background: #fff;
@@ -46,6 +51,7 @@ body {
   display: none;
   flex-direction: column;
   background: #111;
+  text-align: center;
 }
 
 .mobile-menu a {
@@ -92,7 +98,8 @@ section {
 }
 
 h2 {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, white, #34A853);
 }
 
 /* SERVIÇOS */
@@ -196,7 +203,7 @@ h2 {
 }
 /* ===== QUEM SOMOS - CAROUSEL ===== */
 
-.quem-somos {
+.quem-somos  {
   padding: 40px 20px;
   text-align: center;
 }
@@ -287,4 +294,39 @@ h2 {
 
 .btn-google:active {
   transform: scale(0.97);
+}
+
+.servicos {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.avaliacoes  {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.localizacao  {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.contato {
+  
+  padding: 40px 20px;
+  text-align: center;
+}
+
+
+.cta-whatsapp2 {
+  display: inline-block;
+  margin-top: 20px;
+  background: #25d366;
+  color: #fff;
+  padding: 14px;
+  
+  text-decoration: none;
+  border-radius: 6px;
+  width: 400px;
+  
 }
