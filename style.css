@@ -11,9 +11,15 @@ html, body {
  p {
   margin-bottom: 10px;
   line-height: 1.6;
-  font-size: 16px;
+  font-size: 15px;
  }
-
+ul{
+  width:fit-content;
+  margin: 0 auto;
+  text-align: center;
+  
+  
+}
 body {
   background: #fff;
   color: #111;
@@ -114,18 +120,10 @@ h2 {
   padding: 16px;
 }
 
-/* FOOTER */
-.footer {
-  background: #111;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-}
 
-.logo-footer {
-    height: 80px;
-}
 
+
+ 
 @media (min-width: 768px) {
   /* Esconde o hamburguer */
   .menu-btn {
@@ -187,13 +185,13 @@ h2 {
 
     .hero {
 
-        padding:10px;
+        padding:0px;
         background-size: 50%;
         height: auto;
     }
 
     .hero-overlay {
-        height: 635px;
+        height: 600px;
         display: flex;
         align-items: center;
     }
@@ -330,3 +328,194 @@ h2 {
   width: 400px;
   
 }
+
+.adress {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, black, #34A853);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 50px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15)};
+
+.list {
+  display: flex;
+  list-style-position: inside;
+};
+
+.premium-footer {
+  background: radial-gradient(circle at top, #0f2a1f 0%, #0b0b0b 60%);
+  color: white;
+  padding-top: 60px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-top {
+  text-align: center;
+  padding: 0 20px 40px;
+}
+
+.footer-logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.footer-links {
+  margin: 25px 0;
+}
+
+.footer-links a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: white;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: #00ff88;
+  opacity: 1;
+}
+
+.copyright {
+  font-size: 13px;
+  opacity: 0.5;
+  margin-top: 20px;
+}
+
+.footer-dev {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 30px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.dev-left p {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.dev-left h3 {
+  margin: 5px 0 0;
+  color: #00ff88;
+  font-size: 22px;
+}
+
+.dev-right a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: white;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.dev-right a:hover {
+  color: #00ff88;
+  opacity: 1;
+}
+
+.premium-footer {
+  width: 100%;
+  background: linear-gradient(to bottom, #0f2a1f, #0b0b0b);
+  color: white;
+  padding-top: 60px;
+  margin-top: 80px;
+}
+
+.footer-top {
+  text-align: center;
+  padding: 0 20px 40px;
+}
+
+.footer-logo {
+  width: 140px;
+  margin-bottom: 20px;
+}
+
+.footer-top p {
+  margin: 8px 0;
+  opacity: 0.85;
+}
+
+.footer-links {
+  margin: 25px 0;
+}
+
+.footer-links a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: white;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: #00ff88;
+  opacity: 1;
+}
+
+.copyright {
+  font-size: 13px;
+  opacity: 0.5;
+}
+
+.footer-dev {
+  border-top: 1px solid rgba(0, 255, 136, 0.2);
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-dev h3 {
+  margin: 5px 0 0;
+  color: #00ff88;
+  font-size: 22px;
+}
+
+.dev-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: white;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.dev-links a:hover {
+  color: #00ff88;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .footer-dev {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .dev-links {
+    margin-top: 15px;
+  }
+
+  .dev-links a {
+    margin: 0 10px;
+  }
+}
+
+
