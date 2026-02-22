@@ -14,6 +14,7 @@ html, body {
   font-size: 15px;
  }
 ul{
+  list-style: none;
   width:fit-content;
   margin: 0 auto;
   text-align: center;
@@ -110,14 +111,17 @@ h2 {
 
 /* SERVIÇOS */
 .servicos-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+  display: block;
+  align-items:center;
 }
 
 .servico-card {
   border: 1px solid #ddd;
   padding: 16px;
+  img {
+    max-height: auto;
+    width: 200px;
+  }
 }
 
 
