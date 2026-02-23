@@ -156,6 +156,12 @@ h2 {
 
 .menu-desktop {
     display: none;
+
+}
+
+#carousel-image {
+    max-height: 300px;
+    width: auto;
 }
 
 @media (min-width: 768px) {
@@ -231,6 +237,14 @@ h2 {
   gap: 8px;
   margin-top: 15px;
   margin-bottom: 10px;
+  
+}
+
+.container {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
 }
 
 .dot {
