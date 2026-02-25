@@ -100,21 +100,25 @@ body {
 
 /* MENU */
 .mobile-menu {
-  position: fixed;
-  top: 0;
-  right:0;
-  width:45% ;
-  max-width: 200px;
-  height:100vh;
-  background-color: #000;
-  transform: translateX(100%);
-  transition: transform 0.4s ease;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 60%;
+    max-width: 320px;
+    height: 100vh;
 
-  z-index: 10000;
+    background: rgba(20, 20, 20, 0.98);
+    backdrop-filter: blur(8px);
 
-  display: flex;
-  flex-direction: column;
-  padding-top: 80px;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    padding: 100px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    z-index: 9999;
 }
 
 .mobile-menu.active {
@@ -122,11 +126,32 @@ body {
 }
 
 .mobile-menu a {
-  color: #fff;
-  padding: 16px;
-  text-decoration: none;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    position: relative;
+    transition: 0.3s;
 }
 
+.mobile-menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background: #00ff88; /* sua cor verde */
+    transition: 0.3s ease;
+}
+
+.mobile-menu a:hover {
+    color: #00ff88;
+}
+
+.mobile-menu a:hover::after {
+    width: 100%;
+}
 /* HERO */
 .hero {
   height: 70vh;
