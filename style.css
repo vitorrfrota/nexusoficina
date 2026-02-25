@@ -378,7 +378,7 @@ h2 {
 .premium-footer {
   background: radial-gradient(circle at top, #0f2a1f 0%, #0b0b0b 60%);
   color: white;
-  padding-top: 10px;
+  padding-top: 40px;
   font-family: Arial, sans-serif;
   margin-top: 0%;
 }
@@ -461,8 +461,8 @@ h2 {
   width: 100%;
   background: linear-gradient(to bottom, #0f2a1f, #0b0b0b);
   color: white;
-  padding-top: 30px;
-  margin-top: 0px;
+  padding-top: 50px;
+  margin-top: 40px;
 }
 
 .footer-top {
