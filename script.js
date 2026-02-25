@@ -1,10 +1,16 @@
 const menuBtn = document.getElementById("menuBtn");
 const mobileMenu = document.getElementById("mobileMenu");
+const closemenu = document.getElementById("closeMenu");
 
 menuBtn.addEventListener("click", () => {
   mobileMenu.style.display =
     mobileMenu.classList.toggle("active");
+    menuBtn.classList.toggle("active");
 });
+
+closemenu.addEventListener("click", ()=>{
+  mobileMenu.classList.remove("active");
+})
 // ===== CAROUSEL QUEM SOMOS =====
 
 //IMAGENS DO ARRAY
