@@ -7,6 +7,7 @@ menuBtn.addEventListener("click", () => {
 });
 // ===== CAROUSEL QUEM SOMOS =====
 
+//IMAGENS DO ARRAY
 const images = [
   "images/foto1.jpg",
   "images/foto2.jpg",
@@ -15,28 +16,64 @@ const images = [
   "images/foto5.jpg"
 ];
 
+//ESTADO
+let autoPlayActive = true;
 let currentIndex = 0;
+
+//ELEMENTOS
 const dots = document.querySelectorAll(".dot");
 const imageElement = document.getElementById("carousel-image");
+const container = document.querySelector(".container");
 
+//FUNÇÃO PARA ATUALIZAR IMAGEM + DOT
 function updateImage(){
   imageElement.src =images[currentIndex];
   dots.forEach(dot=> dot.classList.remove("active"));
   dots[currentIndex].classList.add("active");
 }
 
-// função que atualiza a imagem a cada 3 segundos
-setInterval(()=>{
-    currentIndex++;
-
-    if(currentIndex>= images.length){
-        currentIndex= 0;
-    }
-
+//PRÓXIMO SLIDE
+function nextSlide() {
+currentIndex++;
+if (currentIndex>=imageElement.length){
+  currentIndex= 0;
+}
 updateImage();
+}
+//SLIDE ANTERIOR
+function prevSlide() {
+currentIndex--;
+if (currentIndex < 0){
+  currentIndex = imageElement.length - 1;
+}
+updateImage();
+}
 
 
-}, 3000);
+// função que atualiza a imagem a cada 3 segundos
+let autoPlay = setInterval(nextSlide, 3000);
+
+//TOUCH AUTOPLAY (ESQUERDA/DIREITA)
+container.addEventListener("touchstart", function(event){
+  //desativa autoplay no primeiro toque
+  if (autoPlayActive) {
+    clearInterval(autoPlay);
+    autoPlayActive = false;
+  }
+
+const largura= container.offsetWidth;
+const toqueX= event.touches[0].clientX - container.getBoundingClientRect().left;
+
+if (toqueX < largura / 2) {
+  prevSlide();
+  } else {
+    nextSlide();
+  }
+  
+
+});
+
+
 
 //CARROSSEL AVALIAÇÕES
 
