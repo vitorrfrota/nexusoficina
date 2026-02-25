@@ -34,18 +34,15 @@ function updateImage(){
 
 //PRÓXIMO SLIDE
 function nextSlide() {
-currentIndex++;
-if (currentIndex>=imageElement.length){
-  currentIndex= 0;
-}
+
+currentIndex = (currentIndex + 1) % images.length;
 updateImage();
 }
 //SLIDE ANTERIOR
 function prevSlide() {
-currentIndex--;
-if (currentIndex < 0){
-  currentIndex = imageElement.length - 1;
-}
+
+currentIndex = (currentIndex - 1 + images.length) % images.length;
+
 updateImage();
 }
 
