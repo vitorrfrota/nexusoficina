@@ -92,42 +92,111 @@ if (toqueX < largura / 2) {
 
 //CARROSSEL AVALIAÇÕES
 
-document.addEventListener("DOMContentLoaded", () => {
+const nx2Track = document.querySelector(".nx2-carousel-track");
+const nx2Slides = document.querySelectorAll(".nx2-slide");
+const nx2DotsContainer = document.querySelector(".nx2-dots");
 
-  const track = document.querySelector(".carousel-track");
-  const slides = document.querySelectorAll(".review-slide");
+let nx2Index = 0;
+let nx2StartX = 0;
+let nx2CurrentTranslate = 0;
+let nx2PrevTranslate = 0;
+let nx2Dragging = false;
+let nx2AnimationID;
+let nx2AutoSlide;
 
-  let currentIndex = 0;
-  let interval;
+/* ===== CRIAR DOTS ===== */
 
-  function updateCarousel() {
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-  }
+nx2Slides.forEach((_, index) => {
+  const dot = document.createElement("span");
+  if (index === 0) dot.classList.add("active");
 
-  function nextSlide() {
-    currentIndex++;
-    if (currentIndex >= slides.length) {
-      currentIndex = 0;
-    }
-    updateCarousel();
-  }
+  dot.addEventListener("click", () => {
+    nx2Index = index;
+    updateNx2Slide();
+    resetNx2Auto();
+  });
 
-  function startCarousel() {
-    interval = setInterval(nextSlide, 4000);
-  }
-
-  function stopCarousel() {
-    clearInterval(interval);
-  }
-
-  // Pausa ao passar o mouse (desktop)
-  track.addEventListener("mouseenter", stopCarousel);
-  track.addEventListener("mouseleave", startCarousel);
-
-  // Pausa ao tocar (mobile)
-  track.addEventListener("touchstart", stopCarousel);
-  track.addEventListener("touchend", startCarousel);
-
-  startCarousel();
-
+  nx2DotsContainer.appendChild(dot);
 });
+
+const nx2Dots = document.querySelectorAll(".nx2-dots span");
+
+/* ===== FUNÇÃO ATUALIZAR ===== */
+
+function updateNx2Slide() {
+  nx2Track.style.transition = "transform 0.4s ease";
+  nx2Track.style.transform = `translateX(-${nx2Index * 100}%)`;
+
+  nx2Slides.forEach(slide => slide.classList.remove("active"));
+  nx2Slides[nx2Index].classList.add("active");
+
+  nx2Dots.forEach(dot => dot.classList.remove("active"));
+  nx2Dots[nx2Index].classList.add("active");
+
+  nx2PrevTranslate = -nx2Index * nx2Track.offsetWidth;
+}
+
+/* ===== LOOP INFINITO ===== */
+
+function nextNx2Slide() {
+  nx2Index++;
+  if (nx2Index >= nx2Slides.length) nx2Index = 0;
+  updateNx2Slide();
+}
+
+function prevNx2Slide() {
+  nx2Index--;
+  if (nx2Index < 0) nx2Index = nx2Slides.length - 1;
+  updateNx2Slide();
+}
+
+/* ===== AUTOPLAY ===== */
+
+function startNx2Auto() {
+  nx2AutoSlide = setInterval(nextNx2Slide, 4000);
+}
+
+function resetNx2Auto() {
+  clearInterval(nx2AutoSlide);
+  startNx2Auto();
+}
+
+startNx2Auto();
+
+/* ===== TOUCH SINCRONIZADO ===== */
+
+nx2Track.addEventListener("touchstart", (e) => {
+  clearInterval(nx2AutoSlide);
+  nx2Dragging = true;
+  nx2StartX = e.touches[0].clientX;
+  nx2AnimationID = requestAnimationFrame(nx2Animation);
+});
+
+nx2Track.addEventListener("touchmove", (e) => {
+  if (!nx2Dragging) return;
+  const currentPosition = e.touches[0].clientX;
+  nx2CurrentTranslate = nx2PrevTranslate + currentPosition - nx2StartX;
+});
+
+nx2Track.addEventListener("touchend", () => {
+  cancelAnimationFrame(nx2AnimationID);
+  nx2Dragging = false;
+
+  const movedBy = nx2CurrentTranslate - nx2PrevTranslate;
+
+  if (movedBy < -100) nextNx2Slide();
+  else if (movedBy > 100) prevNx2Slide();
+  else updateNx2Slide();
+
+  resetNx2Auto();
+});
+
+function nx2Animation() {
+  nx2Track.style.transition = "none";
+  nx2Track.style.transform = `translateX(${nx2CurrentTranslate}px)`;
+  if (nx2Dragging) requestAnimationFrame(nx2Animation);
+}
+
+/* ===== INICIAR PRIMEIRO ATIVO ===== */
+
+nx2Slides[0].classList.add("active");

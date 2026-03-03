@@ -175,6 +175,7 @@ body {
 }
 
 .btn-whatsapp {
+  
   margin-top: 20px;
   background: #25d366;
   color: #fff;
@@ -196,11 +197,14 @@ h2 {
 
 /* SERVIÇOS */
 .servicos-grid {
-  display: block;
-  align-items:center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  
 }
 
 .servico-card {
+  background-color: #f5f7f6;
   border: 1px solid #ddd;
   padding: 16px;
   img {
@@ -229,6 +233,17 @@ h2 {
     text-decoration: none;
     color: #000;
     font-weight: 500;
+  }
+
+  .text {
+    
+    margin:100px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .servicos-grid{
+    margin: 100px;
   }
 }
 
@@ -341,37 +356,97 @@ h2 {
 
 
 /* AVALIAÇÕES*/
-.reviews {
-  width: 100%;
+.avaliacoes {
+  padding: 60px 20px;
+  text-align: center;
+}
+/* ====== DOTS ====== */
+
+.nx2-dots {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  padding: 40px 0;
+  gap: 10px;
 }
 
-.carousel {
-  width: 90%;
-  max-width: 500px;
+.nx2-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #cbd5d1;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.nx2-dots span.active {
+  background-color: #F5F7F6;
+  transform: scale(1.4);
+}
+
+/* ===== CONTAINER ===== */
+
+.nx2-carousel-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   overflow: hidden;
   position: relative;
 }
 
-.carousel-track {
+/* ===== TRACK ===== */
+
+.nx2-carousel-track {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  transition: transform 0.4s ease;
 }
 
-.review-slide {
-  min-width: 100%;
+/* ===== SLIDE ===== */
+
+.nx2-slide {
+  flex: 0 0 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.review-slide img {
+/* ===== CONTEÚDO INTERNO (AGORA SIM APLICAMOS SCALE AQUI) */
+
+.nx2-slide-inner {
   width: 100%;
-  height:400px;
-  object-fit: contain;
-  border-radius: 10px;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  transform: scale(0.92);
+  opacity: 0.6;
 }
+
+.nx2-slide.active .nx2-slide-inner {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.nx2-slide img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+  .nx2-slide img {
+    max-height: 350px;
+  }
+}
+
+
+
+
+
+
+
 
 /* Estilização do botão avaliações*/
 
