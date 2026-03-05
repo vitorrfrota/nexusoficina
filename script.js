@@ -200,3 +200,5 @@ function nx2Animation() {
 /* ===== INICIAR PRIMEIRO ATIVO ===== */
 
 nx2Slides[0].classList.add("active");
+
+
