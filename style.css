@@ -40,9 +40,7 @@ ul{
 }
 body {
   margin:0px;
-   background-color: rgba(20, 20, 20, 0.6);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  
   color: #111;
 }
 
@@ -54,12 +52,12 @@ body {
   padding: 20px;
   position: relative;
   z-index: 1000;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  
+  
   background-color: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border-bottom: 2px solid rgba(255,255,255,0.1);
+  border-bottom: 2px solid rgba(15, 11, 11, 0.5);
   
   
 }
@@ -69,16 +67,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 35px;
-  margin-top: 20px;
+  margin-bottom: 25px;
+  margin-top: 10px;
   border: 1px solid rgba(255, 255, 255, 0.2); /* Borda fina clara */
     border-radius: 15px; /* Cantos arredondados da caixa */
 
        padding: 15px 20px;
     margin: 10px auto; /* Espaçamento externo */
-    width: 90%; /* Largura da caixa em relação ao topo */
+    width: 100%; /* Largura da caixa em relação ao topo */
     max-width: 400px; /* Ajuste conforme o tamanho do seu logo */
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); /* Sombra para dar profundidade */
 
 }
 
@@ -330,8 +328,10 @@ h2 {
 
  
 @media (min-width: 768px) {
+
+  
   .logo{
-    margin-top: 30px;
+    margin-top: 0px;
   }
   .insta{
     display: none;
@@ -379,6 +379,7 @@ h2 {
 }
 
 @media (min-width: 768px) {
+
   .header {
     padding: 10px;
     max-width: 1200px;

@@ -23,6 +23,19 @@ menuLinks.forEach(function(link) {
 
     });
 });
+
+
+// funcao abrir no wpp com mensagem automatica
+function abrirWpp() {
+  window.open("https://wa.me/5521998761020?text=Olá,%20vim%20pelo%20site%20e%20quero%20um%20orçamento.", "_blank");
+};
+// ir para parte de avaliações
+
+function irParaAvaliacoes() {
+  document.getElementById("avaliacoes").scrollIntoView({
+    behavior: "smooth"
+  });
+}
 // ===== CAROUSEL QUEM SOMOS =====
 
 //IMAGENS DO ARRAY
