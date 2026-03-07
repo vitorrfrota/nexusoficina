@@ -12,6 +12,16 @@ img {
   
 }
 
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+
+
+
+
+
 html, body {
   overflow-x: hidden;
 }
@@ -43,6 +53,7 @@ body {
   position: relative;
   z-index: 1000;
   margin-bottom: 20px;
+  margin-top: 20px;
   background-color: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -57,37 +68,58 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 35px;
+  margin-top: 20px;
 
 }
 
-.orcar {
-  background-color: rgba(1, 136, 28, 0.4);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  width: 160px;
-  height: 24px;
-  margin-right:10px ;
-  font-weight: bold;
-}
-
-.avali {
-  background-color: rgba(1, 136, 28, 0.4);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  width: 200px;
-  height: 24px;
-  margin-left: 10px;
-  font-weight: bold;
-}
-
+/* Container dos botões para garantir alinhamento */
 .buttons {
-  display:flex;
-  justify-content: center;
-  margin-bottom: 5px;
-  
-  
-  
+    display: flex;
+    gap: 15px; /* Espaço entre os botões */
+    justify-content: center; /* Centraliza no header se necessário */
+    padding: 10px;
+}
 
+/* Estilo Base Glassmorphism para ambos */
+.orcar, .avali {
+    backdrop-filter: blur(10px); /* Efeito de vidro */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borda fina e clara */
+    padding: 12px 24px;
+    border-radius: 50px; /* Formato pílula moderno */
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    outline: none;
+}
+
+/* Ajuste específico para: PEDIR ORÇAMENTO */
+.orcar {
+    background: rgba(255, 255, 255, 0.2); /* Um pouco mais visível */
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.orcar:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-3px); /* Efeito de flutuar */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajuste específico para: DEPOIMENTOS DE CLIENTES */
+.avali {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.avali:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
 }
 
 
