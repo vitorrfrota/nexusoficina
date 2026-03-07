@@ -40,7 +40,9 @@ ul{
 }
 body {
   margin:0px;
-  background: #fff;
+   background-color: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   color: #111;
 }
 
@@ -69,6 +71,14 @@ body {
   justify-content: space-between;
   margin-bottom: 35px;
   margin-top: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borda fina clara */
+    border-radius: 15px; /* Cantos arredondados da caixa */
+
+       padding: 15px 20px;
+    margin: 10px auto; /* Espaçamento externo */
+    width: 90%; /* Largura da caixa em relação ao topo */
+    max-width: 400px; /* Ajuste conforme o tamanho do seu logo */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
 
 }
 
