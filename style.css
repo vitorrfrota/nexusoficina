@@ -422,6 +422,10 @@ body {
     font-size: 18px;
   }
 
+  .overlay{
+    min-height: 150vh;
+  }
+
 }
 
 
@@ -714,6 +718,14 @@ body {
 @media (max-width: 768px) {
   .nx2-slide img {
     max-height: 350px;
+  }
+
+  .slidee img{
+    min-height: 75vh;
+  }
+
+  .overlay{
+    min-height: 75vh;
   }
 }
 
