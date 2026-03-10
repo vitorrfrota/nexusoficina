@@ -36,6 +36,78 @@ function irParaAvaliacoes() {
     behavior: "smooth"
   });
 }
+
+
+
+// CARROSSEL HOME 
+
+const slidess = document.querySelectorAll('.slidee');
+const dotss = document.querySelectorAll('.dott');
+
+let current = 0;
+let intervalTime = 4000;
+let slideInterval = setInterval(goNext, intervalTime);
+
+function showSlide(index) {
+  slidess.forEach(slidee => slidee.classList.remove('activee'));
+  dotss.forEach(dott => dott.classList.remove('activee'));
+
+  slidess[index].classList.add('activee');
+  dotss[index].classList.add('activee');
+
+  current = index;
+}
+
+function goNext() {
+  current++;
+  if (current >= slidess.length) {
+    current = 0;
+  }
+  showSlide(current);
+}
+
+function goPrev() {
+  current--;
+  if (current < 0) {
+    current = slidess.length - 1;
+  }
+  showSlide(current);
+}
+
+/* Clique nos DOTS */
+dotss.forEach(dott => {
+  dott.addEventListener('click', (e) => {
+    const index = e.target.getAttribute('data-index');
+    showSlide(index);
+    resetInterval();
+  });
+});
+
+/* Clique na imagem (metade esquerda/direita) */
+slidess.forEach(slidee => {
+  slidee.addEventListener('click', (e) => {
+    const width = slidee.clientWidth;
+    const clickX = e.offsetX;
+
+    if (clickX < width / 2) {
+      goPrev();
+    } else {
+      goNext();
+    }
+
+    resetInterval();
+  });
+});
+
+function resetInterval() {
+  clearInterval(slideInterval);
+  slideInterval = setInterval(goNext, intervalTime);
+}
+
+
+
+
+
 // ===== CAROUSEL QUEM SOMOS =====
 
 //IMAGENS DO ARRAY
