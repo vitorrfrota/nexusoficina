@@ -723,14 +723,16 @@ body {
 
   .slidee img{
     min-height: 75vh;
+  
   }
 
   .overlay{
     min-height: 75vh;
   }
-  .content{
-    
+  h1{
+    margin-top: 20vh;
   }
+
 }
 
 
