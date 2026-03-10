@@ -351,6 +351,7 @@ body {
   text-align: center;
   padding: 0 20px;
   width: 100%;
+  margin-top: 40px;
  
 }
 
@@ -726,6 +727,9 @@ body {
 
   .overlay{
     min-height: 75vh;
+  }
+  .content{
+    
   }
 }
 
