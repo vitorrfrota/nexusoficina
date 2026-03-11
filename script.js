@@ -1,289 +1,438 @@
-const menuBtn = document.getElementById("menuBtn");
-const mobileMenu = document.getElementById("mobileMenu");
-const closemenu = document.getElementById("closeMenu");
-const menuLinks = document.querySelectorAll(".mobile-menu a");
+/* =================================
+MENU MOBILE
+================================= */
+
+const menuBtn = document.getElementById("menuBtn")
+const mobileMenu = document.getElementById("mobileMenu")
+const closeMenu = document.getElementById("closeMenu")
+const menuLinks = document.querySelectorAll(".mobile-menu a")
 
 menuBtn.addEventListener("click", () => {
-  mobileMenu.style.display =
-    mobileMenu.classList.toggle("active");
-    menuBtn.classList.toggle("active");
-});
 
-closemenu.addEventListener("click", ()=>{
-  mobileMenu.classList.remove("active");
+mobileMenu.classList.toggle("active")
+menuBtn.classList.toggle("active")
+
 })
 
-menuLinks.forEach(function(link) {
-    link.addEventListener("click", function() {
-        
-        setTimeout(function() {
-            mobileMenu.classList.remove("active");
-            menuBtn.classList.remove("active");
-        }, 500); // 500 milissegundos = 0.5s
+closeMenu.addEventListener("click", () => {
 
-    });
-});
+mobileMenu.classList.remove("active")
+menuBtn.classList.remove("active")
+
+})
+
+menuLinks.forEach(link => {
+
+link.addEventListener("click", () => {
+
+setTimeout(()=>{
+
+mobileMenu.classList.remove("active")
+menuBtn.classList.remove("active")
+
+},400)
+
+})
+
+})
 
 
-// funcao abrir no wpp com mensagem automatica
-function abrirWpp() {
-  window.open("https://wa.me/5521998761020?text=Olá,%20vim%20pelo%20site%20e%20quero%20um%20orçamento.", "_blank");
-};
-// ir para parte de avaliações
+/* =================================
+WHATSAPP
+================================= */
 
-function irParaAvaliacoes() {
-  document.getElementById("avaliacoes").scrollIntoView({
-    behavior: "smooth"
-  });
+function abrirWpp(){
+
+window.open(
+"https://wa.me/5521998761020?text=Olá,%20vim%20pelo%20site%20e%20quero%20um%20orçamento.",
+"_blank"
+)
+
+}
+
+
+/* =================================
+SCROLL PARA AVALIAÇÕES
+================================= */
+
+function irParaAvaliacoes(){
+
+document.getElementById("avaliacoes").scrollIntoView({
+
+behavior:"smooth"
+
+})
+
 }
 
 
 
-// CARROSSEL HOME 
+/* =================================
+CARROSSEL HERO
+================================= */
 
-const slidess = document.querySelectorAll('.slidee');
-const dotss = document.querySelectorAll('.dott');
+const heroSlides = document.querySelectorAll(".slidee")
+const heroDots = document.querySelectorAll(".dott")
 
-let current = 0;
-let intervalTime = 4000;
-let slideInterval = setInterval(goNext, intervalTime);
+let heroIndex = 0
+let heroIntervalTime = 4000
+let heroInterval = setInterval(nextHeroSlide, heroIntervalTime)
 
-function showSlide(index) {
-  slidess.forEach(slidee => slidee.classList.remove('activee'));
-  dotss.forEach(dott => dott.classList.remove('activee'));
 
-  slidess[index].classList.add('activee');
-  dotss[index].classList.add('activee');
+function showHeroSlide(index){
 
-  current = index;
-}
+heroSlides.forEach(slide => slide.classList.remove("activee"))
+heroDots.forEach(dot => dot.classList.remove("activee"))
 
-function goNext() {
-  current++;
-  if (current >= slidess.length) {
-    current = 0;
-  }
-  showSlide(current);
-}
+heroSlides[index].classList.add("activee")
+heroDots[index].classList.add("activee")
 
-function goPrev() {
-  current--;
-  if (current < 0) {
-    current = slidess.length - 1;
-  }
-  showSlide(current);
-}
+heroIndex = index
 
-/* Clique nos DOTS */
-dotss.forEach(dott => {
-  dott.addEventListener('click', (e) => {
-    const index = e.target.getAttribute('data-index');
-    showSlide(index);
-    resetInterval();
-  });
-});
-
-/* Clique na imagem (metade esquerda/direita) */
-slidess.forEach(slidee => {
-  slidee.addEventListener('click', (e) => {
-    const width = slidee.clientWidth;
-    const clickX = e.offsetX;
-
-    if (clickX < width / 2) {
-      goPrev();
-    } else {
-      goNext();
-    }
-
-    resetInterval();
-  });
-});
-
-function resetInterval() {
-  clearInterval(slideInterval);
-  slideInterval = setInterval(goNext, intervalTime);
 }
 
 
+function nextHeroSlide(){
 
+heroIndex++
 
-
-// ===== CAROUSEL QUEM SOMOS =====
-
-//IMAGENS DO ARRAY
-const images = [
-  "images/foto1.jpg",
-  "images/foto2.jpg",
-  "images/foto3.jpg",
-  "images/foto4.jpg",
-  "images/foto5.jpg"
-];
-
-//ESTADO
-let autoPlayActive = true;
-let currentIndex = 0;
-
-//ELEMENTOS
-const dots = document.querySelectorAll(".dot");
-const imageElement = document.getElementById("carousel-image");
-const container = document.querySelector(".container");
-
-//FUNÇÃO PARA ATUALIZAR IMAGEM + DOT
-function updateImage(){
-  imageElement.src =images[currentIndex];
-  dots.forEach(dot=> dot.classList.remove("active"));
-  dots[currentIndex].classList.add("active");
+if(heroIndex >= heroSlides.length){
+heroIndex = 0
 }
 
-//PRÓXIMO SLIDE
-function nextSlide() {
+showHeroSlide(heroIndex)
 
-currentIndex = (currentIndex + 1) % images.length;
-updateImage();
-}
-//SLIDE ANTERIOR
-function prevSlide() {
-
-currentIndex = (currentIndex - 1 + images.length) % images.length;
-
-updateImage();
 }
 
 
-// função que atualiza a imagem a cada 3 segundos
-let autoPlay = setInterval(nextSlide, 3000);
+function prevHeroSlide(){
 
-//TOUCH AUTOPLAY (ESQUERDA/DIREITA)
-container.addEventListener("touchstart", function(event){
-  //desativa autoplay no primeiro toque
-  if (autoPlayActive) {
-    clearInterval(autoPlay);
-    autoPlayActive = false;
-  }
+heroIndex--
 
-const largura= container.offsetWidth;
-const toqueX= event.touches[0].clientX - container.getBoundingClientRect().left;
-
-if (toqueX < largura / 2) {
-  prevSlide();
-  } else {
-    nextSlide();
-  }
-  
-
-});
-
-
-
-//CARROSSEL AVALIAÇÕES
-
-const nx2Track = document.querySelector(".nx2-carousel-track");
-const nx2Slides = document.querySelectorAll(".nx2-slide");
-const nx2DotsContainer = document.querySelector(".nx2-dots");
-
-let nx2Index = 0;
-let nx2StartX = 0;
-let nx2CurrentTranslate = 0;
-let nx2PrevTranslate = 0;
-let nx2Dragging = false;
-let nx2AnimationID;
-let nx2AutoSlide;
-
-/* ===== CRIAR DOTS ===== */
-
-nx2Slides.forEach((_, index) => {
-  const dot = document.createElement("span");
-  if (index === 0) dot.classList.add("active");
-
-  dot.addEventListener("click", () => {
-    nx2Index = index;
-    updateNx2Slide();
-    resetNx2Auto();
-  });
-
-  nx2DotsContainer.appendChild(dot);
-});
-
-const nx2Dots = document.querySelectorAll(".nx2-dots span");
-
-/* ===== FUNÇÃO ATUALIZAR ===== */
-
-function updateNx2Slide() {
-  nx2Track.style.transition = "transform 0.4s ease";
-  nx2Track.style.transform = `translateX(-${nx2Index * 100}%)`;
-
-  nx2Slides.forEach(slide => slide.classList.remove("active"));
-  nx2Slides[nx2Index].classList.add("active");
-
-  nx2Dots.forEach(dot => dot.classList.remove("active"));
-  nx2Dots[nx2Index].classList.add("active");
-
-  nx2PrevTranslate = -nx2Index * nx2Track.offsetWidth;
+if(heroIndex < 0){
+heroIndex = heroSlides.length - 1
 }
 
-/* ===== LOOP INFINITO ===== */
+showHeroSlide(heroIndex)
 
-function nextNx2Slide() {
-  nx2Index++;
-  if (nx2Index >= nx2Slides.length) nx2Index = 0;
-  updateNx2Slide();
 }
 
-function prevNx2Slide() {
-  nx2Index--;
-  if (nx2Index < 0) nx2Index = nx2Slides.length - 1;
-  updateNx2Slide();
+
+heroDots.forEach(dot => {
+
+dot.addEventListener("click", e => {
+
+const index = Number(e.target.dataset.index)
+
+showHeroSlide(index)
+
+resetHeroInterval()
+
+})
+
+})
+
+
+heroSlides.forEach(slide => {
+
+slide.addEventListener("click", e => {
+
+const width = slide.clientWidth
+const clickX = e.offsetX
+
+if(clickX < width / 2){
+prevHeroSlide()
+}else{
+nextHeroSlide()
 }
 
-/* ===== AUTOPLAY ===== */
+resetHeroInterval()
 
-function startNx2Auto() {
-  nx2AutoSlide = setInterval(nextNx2Slide, 4000);
+})
+
+})
+
+
+function resetHeroInterval(){
+
+clearInterval(heroInterval)
+
+heroInterval = setInterval(nextHeroSlide, heroIntervalTime)
+
 }
 
-function resetNx2Auto() {
-  clearInterval(nx2AutoSlide);
-  startNx2Auto();
+
+
+/* =================================
+CARROSSEL QUEM SOMOS
+================================= */
+
+const aboutImages = [
+
+"images/foto1.jpg",
+"images/foto2.jpg",
+"images/foto3.jpg",
+"images/foto4.jpg",
+"images/foto5.jpg"
+
+]
+
+const aboutImage = document.getElementById("carousel-image")
+const aboutDots = document.querySelectorAll(".dot")
+const aboutContainer = document.querySelector(".carousel-container")
+
+let aboutIndex = 0
+
+
+function updateAboutSlide(){
+
+aboutImage.src = aboutImages[aboutIndex]
+
+aboutDots.forEach(dot => dot.classList.remove("active"))
+
+aboutDots[aboutIndex].classList.add("active")
+
 }
 
-startNx2Auto();
 
-/* ===== TOUCH SINCRONIZADO ===== */
+function nextAboutSlide(){
 
-nx2Track.addEventListener("touchstart", (e) => {
-  clearInterval(nx2AutoSlide);
-  nx2Dragging = true;
-  nx2StartX = e.touches[0].clientX;
-  nx2AnimationID = requestAnimationFrame(nx2Animation);
-});
+aboutIndex = (aboutIndex + 1) % aboutImages.length
 
-nx2Track.addEventListener("touchmove", (e) => {
-  if (!nx2Dragging) return;
-  const currentPosition = e.touches[0].clientX;
-  nx2CurrentTranslate = nx2PrevTranslate + currentPosition - nx2StartX;
-});
+updateAboutSlide()
 
-nx2Track.addEventListener("touchend", () => {
-  cancelAnimationFrame(nx2AnimationID);
-  nx2Dragging = false;
-
-  const movedBy = nx2CurrentTranslate - nx2PrevTranslate;
-
-  if (movedBy < -100) nextNx2Slide();
-  else if (movedBy > 100) prevNx2Slide();
-  else updateNx2Slide();
-
-  resetNx2Auto();
-});
-
-function nx2Animation() {
-  nx2Track.style.transition = "none";
-  nx2Track.style.transform = `translateX(${nx2CurrentTranslate}px)`;
-  if (nx2Dragging) requestAnimationFrame(nx2Animation);
 }
 
-/* ===== INICIAR PRIMEIRO ATIVO ===== */
 
-nx2Slides[0].classList.add("active");
+function prevAboutSlide(){
+
+aboutIndex = (aboutIndex - 1 + aboutImages.length) % aboutImages.length
+
+updateAboutSlide()
+
+}
 
 
+let aboutAutoPlay = setInterval(nextAboutSlide,3000)
+
+
+aboutContainer.addEventListener("touchstart", e => {
+
+clearInterval(aboutAutoPlay)
+
+const largura = aboutContainer.offsetWidth
+
+const toqueX = e.touches[0].clientX - aboutContainer.getBoundingClientRect().left
+
+if(toqueX < largura / 2){
+prevAboutSlide()
+}else{
+nextAboutSlide()
+}
+
+})
+
+
+aboutDots.forEach((dot,index)=>{
+
+dot.addEventListener("click",()=>{
+
+aboutIndex=index
+
+updateAboutSlide()
+
+})
+
+})
+
+
+
+/* =================================
+CARROSSEL AVALIAÇÕES
+================================= */
+
+const reviewTrack = document.querySelector(".nx2-carousel-track")
+const reviewSlides = document.querySelectorAll(".nx2-slide")
+const reviewDotsContainer = document.querySelector(".nx2-dots")
+
+let reviewIndex = 0
+let startX = 0
+let currentTranslate = 0
+let prevTranslate = 0
+let dragging = false
+let animationID
+let autoSlide
+
+
+/* criar dots automaticamente */
+
+reviewSlides.forEach((_,index)=>{
+
+const dot = document.createElement("span")
+
+if(index === 0){
+dot.classList.add("active")
+}
+
+dot.addEventListener("click",()=>{
+
+reviewIndex = index
+
+updateReviewSlide()
+
+resetAutoSlide()
+
+})
+
+reviewDotsContainer.appendChild(dot)
+
+})
+
+const reviewDots = document.querySelectorAll(".nx2-dots span")
+
+
+function updateReviewSlide(){
+
+reviewTrack.style.transition="transform 0.4s ease"
+
+reviewTrack.style.transform=`translateX(-${reviewIndex * 100}%)`
+
+reviewDots.forEach(dot=>dot.classList.remove("active"))
+
+reviewDots[reviewIndex].classList.add("active")
+
+const slideWidth = reviewSlides[0].offsetWidth
+
+prevTranslate = -reviewIndex * slideWidth
+
+}
+
+
+function nextReviewSlide(){
+
+reviewIndex++
+
+if(reviewIndex >= reviewSlides.length){
+reviewIndex = 0
+}
+
+updateReviewSlide()
+
+}
+
+
+function prevReviewSlide(){
+
+reviewIndex--
+
+if(reviewIndex < 0){
+reviewIndex = reviewSlides.length - 1
+}
+
+updateReviewSlide()
+
+}
+
+
+
+/* autoplay */
+
+function startAutoSlide(){
+
+autoSlide = setInterval(nextReviewSlide,4000)
+
+}
+
+function resetAutoSlide(){
+
+clearInterval(autoSlide)
+
+startAutoSlide()
+
+}
+
+startAutoSlide()
+
+
+
+/* touch drag */
+
+reviewTrack.addEventListener("touchstart", e => {
+
+clearInterval(autoSlide)
+
+dragging = true
+
+startX = e.touches[0].clientX
+
+animationID = requestAnimationFrame(animation)
+
+})
+
+reviewTrack.addEventListener("touchmove", e => {
+
+if(!dragging) return
+
+const currentPosition = e.touches[0].clientX
+
+currentTranslate = prevTranslate + currentPosition - startX
+
+})
+
+reviewTrack.addEventListener("touchend", () => {
+
+cancelAnimationFrame(animationID)
+
+dragging = false
+
+const movedBy = currentTranslate - prevTranslate
+
+if(movedBy < -100){
+nextReviewSlide()
+}
+else if(movedBy > 100){
+prevReviewSlide()
+}
+else{
+updateReviewSlide()
+}
+
+resetAutoSlide()
+
+})
+
+
+function animation(){
+
+reviewTrack.style.transition="none"
+
+reviewTrack.style.transform=`translateX(${currentTranslate}px)`
+
+if(dragging){
+requestAnimationFrame(animation)
+}
+
+}
+
+
+/* =================================
+ANIMAÇÃO SCROLL
+================================= */
+
+const reveals = document.querySelectorAll(".reveal-left, .reveal-right")
+
+const observer = new IntersectionObserver(entries => {
+
+entries.forEach(entry => {
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("reveal-show")
+
+}
+
+})
+
+})
+
+reveals.forEach(el => observer.observe(el))
