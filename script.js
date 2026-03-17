@@ -1,438 +1,253 @@
-/* =================================
-MENU MOBILE
-================================= */
+// Ativa animacoes de reveal apenas quando JS esta rodando
+document.documentElement.classList.add(`js-ready`);
 
-const menuBtn = document.getElementById("menuBtn")
-const mobileMenu = document.getElementById("mobileMenu")
-const closeMenu = document.getElementById("closeMenu")
-const menuLinks = document.querySelectorAll(".mobile-menu a")
+// NEXUS OFICINA - SCRIPT.JS
 
-menuBtn.addEventListener("click", () => {
+// MENU MOBILE
+var menuBtn = document.getElementById(`menuBtn`);
+var mobileMenu = document.getElementById(`mobileMenu`);
+var closeMenuEl = document.getElementById(`closeMenu`);
+var menuOverlay = document.getElementById(`menuOverlay`);
+var menuLinks = document.querySelectorAll(`.mobile-menu a`);
 
-mobileMenu.classList.toggle("active")
-menuBtn.classList.toggle("active")
-
-})
-
-closeMenu.addEventListener("click", () => {
-
-mobileMenu.classList.remove("active")
-menuBtn.classList.remove("active")
-
-})
-
-menuLinks.forEach(link => {
-
-link.addEventListener("click", () => {
-
-setTimeout(()=>{
-
-mobileMenu.classList.remove("active")
-menuBtn.classList.remove("active")
-
-},400)
-
-})
-
-})
-
-
-/* =================================
-WHATSAPP
-================================= */
-
-function abrirWpp(){
-
-window.open(
-"https://wa.me/5521998761020?text=Olá,%20vim%20pelo%20site%20e%20quero%20um%20orçamento.",
-"_blank"
-)
-
+function openMenu() {
+mobileMenu.classList.add(`active`);
+menuOverlay.classList.add(`active`);
+menuBtn.classList.add(`active`);
+document.body.style.overflow = `hidden`;
 }
 
-
-/* =================================
-SCROLL PARA AVALIAÇÕES
-================================= */
-
-function irParaAvaliacoes(){
-
-document.getElementById("avaliacoes").scrollIntoView({
-
-behavior:"smooth"
-
-})
-
+function closeMenuFn() {
+mobileMenu.classList.remove(`active`);
+menuOverlay.classList.remove(`active`);
+menuBtn.classList.remove(`active`);
+document.body.style.overflow = ``;
 }
 
+if (menuBtn) { menuBtn.addEventListener(`click`, openMenu); }
+if (closeMenuEl) { closeMenuEl.addEventListener(`click`, closeMenuFn); }
+if (menuOverlay) { menuOverlay.addEventListener(`click`, closeMenuFn); }
 
+menuLinks.forEach(function(link) {
+link.addEventListener(`click`, function() {
+setTimeout(closeMenuFn, 300);
+});
+});
 
-/* =================================
-CARROSSEL HERO
-================================= */
-
-const heroSlides = document.querySelectorAll(".slidee")
-const heroDots = document.querySelectorAll(".dott")
-
-let heroIndex = 0
-let heroIntervalTime = 4000
-let heroInterval = setInterval(nextHeroSlide, heroIntervalTime)
-
-
-function showHeroSlide(index){
-
-heroSlides.forEach(slide => slide.classList.remove("activee"))
-heroDots.forEach(dot => dot.classList.remove("activee"))
-
-heroSlides[index].classList.add("activee")
-heroDots[index].classList.add("activee")
-
-heroIndex = index
-
+// WHATSAPP
+function abrirWpp() {
+window.open(`https://wa.me/5521998761020?text=Ola%2C%20vim%20pelo%20site%20e%20quero%20um%20orcamento.`, `_blank`);
 }
 
-
-function nextHeroSlide(){
-
-heroIndex++
-
-if(heroIndex >= heroSlides.length){
-heroIndex = 0
+function irParaAvaliacoes() {
+document.getElementById(`avaliacoes`).scrollIntoView({ behavior: `smooth` });
 }
 
-showHeroSlide(heroIndex)
+// CARROSSEL HERO
+var slidess = document.querySelectorAll(`.slidee`);
+var dotss = document.querySelectorAll(`.dott`);
+var heroCurrent = 0;
+var heroInterval = setInterval(heroNext, 4500);
 
+function showHeroSlide(index) {
+slidess.forEach(function(s) { s.classList.remove(`activee`); });
+dotss.forEach(function(d) { d.classList.remove(`activee`); });
+slidess[index].classList.add(`activee`);
+dotss[index].classList.add(`activee`);
+heroCurrent = index;
 }
 
-
-function prevHeroSlide(){
-
-heroIndex--
-
-if(heroIndex < 0){
-heroIndex = heroSlides.length - 1
+function heroNext() {
+heroCurrent = (heroCurrent + 1) % slidess.length;
+showHeroSlide(heroCurrent);
 }
 
-showHeroSlide(heroIndex)
-
+function heroPrev() {
+heroCurrent = (heroCurrent - 1 + slidess.length) % slidess.length;
+showHeroSlide(heroCurrent);
 }
 
+dotss.forEach(function(dot) {
+dot.addEventListener(`click`, function(e) {
+var idx = parseInt(e.target.getAttribute(`data-index`));
+showHeroSlide(idx);
+clearInterval(heroInterval);
+heroInterval = setInterval(heroNext, 4500);
+});
+});
 
-heroDots.forEach(dot => {
+slidess.forEach(function(slide) {
+slide.addEventListener(`click`, function(e) {
+var half = slide.clientWidth / 2;
+if (e.offsetX < half) { heroPrev(); } else { heroNext(); }
+clearInterval(heroInterval);
+heroInterval = setInterval(heroNext, 4500);
+});
+});
 
-dot.addEventListener("click", e => {
-
-const index = Number(e.target.dataset.index)
-
-showHeroSlide(index)
-
-resetHeroInterval()
-
-})
-
-})
-
-
-heroSlides.forEach(slide => {
-
-slide.addEventListener("click", e => {
-
-const width = slide.clientWidth
-const clickX = e.offsetX
-
-if(clickX < width / 2){
-prevHeroSlide()
-}else{
-nextHeroSlide()
+var heroTouchStart = 0;
+var heroEl = document.querySelector(`.carousel`);
+if (heroEl) {
+heroEl.addEventListener(`touchstart`, function(e) {
+heroTouchStart = e.touches[0].clientX;
+}, { passive: true });
+heroEl.addEventListener(`touchend`, function(e) {
+var diff = heroTouchStart - e.changedTouches[0].clientX;
+if (Math.abs(diff) > 50) {
+if (diff > 0) { heroNext(); } else { heroPrev(); }
+clearInterval(heroInterval);
+heroInterval = setInterval(heroNext, 4500);
+}
+}, { passive: true });
 }
 
-resetHeroInterval()
+// CARROSSEL QUEM SOMOS
+var qsTrack = document.getElementById(`qsTrack`);
+var qsSlides = document.querySelectorAll(`.qs-slide`);
+var qsDotsContainer = document.getElementById(`qsDots`);
+var qsPrevBtn = document.getElementById(`qsPrev`);
+var qsNextBtn = document.getElementById(`qsNext`);
+var qsIndex = 0;
+var qsAutoPlay;
 
-})
-
-})
-
-
-function resetHeroInterval(){
-
-clearInterval(heroInterval)
-
-heroInterval = setInterval(nextHeroSlide, heroIntervalTime)
-
+if (qsDotsContainer) {
+qsSlides.forEach(function(slide, i) {
+var dot = document.createElement(`span`);
+if (i === 0) { dot.classList.add(`active`); }
+dot.addEventListener(`click`, function() { qsGoTo(i); qsResetAuto(); });
+qsDotsContainer.appendChild(dot);
+});
 }
 
+var qsDots = qsDotsContainer ? qsDotsContainer.querySelectorAll(`span`) : [];
 
-
-/* =================================
-CARROSSEL QUEM SOMOS
-================================= */
-
-const aboutImages = [
-
-"images/foto1.jpg",
-"images/foto2.jpg",
-"images/foto3.jpg",
-"images/foto4.jpg",
-"images/foto5.jpg"
-
-]
-
-const aboutImage = document.getElementById("carousel-image")
-const aboutDots = document.querySelectorAll(".dot")
-const aboutContainer = document.querySelector(".carousel-container")
-
-let aboutIndex = 0
-
-
-function updateAboutSlide(){
-
-aboutImage.src = aboutImages[aboutIndex]
-
-aboutDots.forEach(dot => dot.classList.remove("active"))
-
-aboutDots[aboutIndex].classList.add("active")
-
+function qsGoTo(index) {
+if (!qsTrack || qsSlides.length === 0) { return; }
+qsSlides[qsIndex].classList.remove(`active`);
+if (qsDots[qsIndex]) { qsDots[qsIndex].classList.remove(`active`); }
+qsIndex = (index + qsSlides.length) % qsSlides.length;
+qsTrack.style.transform = `translateX(-` + (qsIndex * 100) + `%)`;
+qsSlides[qsIndex].classList.add(`active`);
+if (qsDots[qsIndex]) { qsDots[qsIndex].classList.add(`active`); }
 }
 
+function qsNext() { qsGoTo(qsIndex + 1); }
+function qsPrev() { qsGoTo(qsIndex - 1); }
+function qsStartAuto() { qsAutoPlay = setInterval(qsNext, 3500); }
+function qsResetAuto() { clearInterval(qsAutoPlay); qsStartAuto(); }
 
-function nextAboutSlide(){
+if (qsPrevBtn) { qsPrevBtn.addEventListener(`click`, function() { qsPrev(); qsResetAuto(); }); }
+if (qsNextBtn) { qsNextBtn.addEventListener(`click`, function() { qsNext(); qsResetAuto(); }); }
 
-aboutIndex = (aboutIndex + 1) % aboutImages.length
-
-updateAboutSlide()
-
+if (qsTrack) {
+var qsTouchStart = 0;
+qsTrack.addEventListener(`touchstart`, function(e) {
+qsTouchStart = e.touches[0].clientX;
+clearInterval(qsAutoPlay);
+}, { passive: true });
+qsTrack.addEventListener(`touchend`, function(e) {
+var diff = qsTouchStart - e.changedTouches[0].clientX;
+if (Math.abs(diff) > 50) {
+if (diff > 0) { qsNext(); } else { qsPrev(); }
+}
+qsResetAuto();
+}, { passive: true });
 }
 
-
-function prevAboutSlide(){
-
-aboutIndex = (aboutIndex - 1 + aboutImages.length) % aboutImages.length
-
-updateAboutSlide()
-
+if (qsSlides.length > 0) {
+qsSlides[0].classList.add(`active`);
+qsStartAuto();
 }
 
+// CARROSSEL AVALIACOES
+var nx2Track = document.getElementById(`nx2Track`);
+var nx2Slides = document.querySelectorAll(`.nx2-slide`);
+var nx2DotsContainer = document.getElementById(`nx2Dots`);
+var nx2PrevBtn = document.getElementById(`nx2Prev`);
+var nx2NextBtn = document.getElementById(`nx2Next`);
+var nx2Index = 0;
+var nx2AutoSlide;
+var nx2TouchStartX = 0;
+var nx2IsDragging = false;
 
-let aboutAutoPlay = setInterval(nextAboutSlide,3000)
-
-
-aboutContainer.addEventListener("touchstart", e => {
-
-clearInterval(aboutAutoPlay)
-
-const largura = aboutContainer.offsetWidth
-
-const toqueX = e.touches[0].clientX - aboutContainer.getBoundingClientRect().left
-
-if(toqueX < largura / 2){
-prevAboutSlide()
-}else{
-nextAboutSlide()
+if (nx2DotsContainer) {
+nx2Slides.forEach(function(slide, i) {
+var dot = document.createElement(`span`);
+if (i === 0) { dot.classList.add(`active`); }
+dot.addEventListener(`click`, function() { nx2GoTo(i); nx2ResetAuto(); });
+nx2DotsContainer.appendChild(dot);
+});
 }
 
-})
+var nx2Dots = nx2DotsContainer ? nx2DotsContainer.querySelectorAll(`span`) : [];
 
-
-aboutDots.forEach((dot,index)=>{
-
-dot.addEventListener("click",()=>{
-
-aboutIndex=index
-
-updateAboutSlide()
-
-})
-
-})
-
-
-
-/* =================================
-CARROSSEL AVALIAÇÕES
-================================= */
-
-const reviewTrack = document.querySelector(".nx2-carousel-track")
-const reviewSlides = document.querySelectorAll(".nx2-slide")
-const reviewDotsContainer = document.querySelector(".nx2-dots")
-
-let reviewIndex = 0
-let startX = 0
-let currentTranslate = 0
-let prevTranslate = 0
-let dragging = false
-let animationID
-let autoSlide
-
-
-/* criar dots automaticamente */
-
-reviewSlides.forEach((_,index)=>{
-
-const dot = document.createElement("span")
-
-if(index === 0){
-dot.classList.add("active")
+function nx2GoTo(index) {
+if (!nx2Track || nx2Slides.length === 0) { return; }
+nx2Slides[nx2Index].classList.remove(`active`);
+if (nx2Dots[nx2Index]) { nx2Dots[nx2Index].classList.remove(`active`); }
+nx2Index = (index + nx2Slides.length) % nx2Slides.length;
+nx2Track.style.transition = `transform 0.45s cubic-bezier(0.4,0,0.2,1)`;
+nx2Track.style.transform = `translateX(-` + (nx2Index * 100) + `%)`;
+nx2Slides[nx2Index].classList.add(`active`);
+if (nx2Dots[nx2Index]) { nx2Dots[nx2Index].classList.add(`active`); }
 }
 
-dot.addEventListener("click",()=>{
+function nx2Next() { nx2GoTo(nx2Index + 1); }
+function nx2Prev() { nx2GoTo(nx2Index - 1); }
+function nx2StartAuto() { nx2AutoSlide = setInterval(nx2Next, 4000); }
+function nx2ResetAuto() { clearInterval(nx2AutoSlide); nx2StartAuto(); }
 
-reviewIndex = index
+if (nx2PrevBtn) { nx2PrevBtn.addEventListener(`click`, function() { nx2Prev(); nx2ResetAuto(); }); }
+if (nx2NextBtn) { nx2NextBtn.addEventListener(`click`, function() { nx2Next(); nx2ResetAuto(); }); }
 
-updateReviewSlide()
-
-resetAutoSlide()
-
-})
-
-reviewDotsContainer.appendChild(dot)
-
-})
-
-const reviewDots = document.querySelectorAll(".nx2-dots span")
-
-
-function updateReviewSlide(){
-
-reviewTrack.style.transition="transform 0.4s ease"
-
-reviewTrack.style.transform=`translateX(-${reviewIndex * 100}%)`
-
-reviewDots.forEach(dot=>dot.classList.remove("active"))
-
-reviewDots[reviewIndex].classList.add("active")
-
-const slideWidth = reviewSlides[0].offsetWidth
-
-prevTranslate = -reviewIndex * slideWidth
-
+if (nx2Track) {
+nx2Track.addEventListener(`touchstart`, function(e) {
+nx2TouchStartX = e.touches[0].clientX;
+nx2IsDragging = true;
+clearInterval(nx2AutoSlide);
+}, { passive: true });
+nx2Track.addEventListener(`touchend`, function(e) {
+if (!nx2IsDragging) { return; }
+var diff = nx2TouchStartX - e.changedTouches[0].clientX;
+nx2Track.style.transition = `transform 0.45s cubic-bezier(0.4,0,0.2,1)`;
+nx2Track.style.transform = `translateX(-` + (nx2Index * 100) + `%)`;
+if (Math.abs(diff) > 60) {
+if (diff > 0) { nx2Next(); } else { nx2Prev(); }
+} else {
+nx2GoTo(nx2Index);
+}
+nx2IsDragging = false;
+nx2ResetAuto();
+}, { passive: true });
+nx2Track.addEventListener(`touchmove`, function(e) {
+if (!nx2IsDragging) { return; }
+var dx = Math.abs(e.touches[0].clientX - nx2TouchStartX);
+if (dx > 10) { e.preventDefault(); }
+}, { passive: false });
 }
 
-
-function nextReviewSlide(){
-
-reviewIndex++
-
-if(reviewIndex >= reviewSlides.length){
-reviewIndex = 0
+if (nx2Slides.length > 0) {
+nx2Slides[0].classList.add(`active`);
+nx2StartAuto();
 }
 
-updateReviewSlide()
+// REVEAL ANIMATION - com fallback imediato
+var revealElements = document.querySelectorAll(`[data-reveal]`);
 
+if (typeof IntersectionObserver !== `undefined`) {
+var revealObserver = new IntersectionObserver(function(entries) {
+entries.forEach(function(entry) {
+if (entry.isIntersecting) {
+var delay = entry.target.getAttribute(`data-delay`) || 0;
+setTimeout(function() {
+entry.target.classList.add(`revealed`);
+}, parseInt(delay));
+revealObserver.unobserve(entry.target);
 }
-
-
-function prevReviewSlide(){
-
-reviewIndex--
-
-if(reviewIndex < 0){
-reviewIndex = reviewSlides.length - 1
+});
+}, { threshold: 0.1 });
+revealElements.forEach(function(el) { revealObserver.observe(el); });
+} else {
+// Fallback: mostra tudo imediatamente se IntersectionObserver nao suportado
+revealElements.forEach(function(el) { el.classList.add(`revealed`); });
 }
-
-updateReviewSlide()
-
-}
-
-
-
-/* autoplay */
-
-function startAutoSlide(){
-
-autoSlide = setInterval(nextReviewSlide,4000)
-
-}
-
-function resetAutoSlide(){
-
-clearInterval(autoSlide)
-
-startAutoSlide()
-
-}
-
-startAutoSlide()
-
-
-
-/* touch drag */
-
-reviewTrack.addEventListener("touchstart", e => {
-
-clearInterval(autoSlide)
-
-dragging = true
-
-startX = e.touches[0].clientX
-
-animationID = requestAnimationFrame(animation)
-
-})
-
-reviewTrack.addEventListener("touchmove", e => {
-
-if(!dragging) return
-
-const currentPosition = e.touches[0].clientX
-
-currentTranslate = prevTranslate + currentPosition - startX
-
-})
-
-reviewTrack.addEventListener("touchend", () => {
-
-cancelAnimationFrame(animationID)
-
-dragging = false
-
-const movedBy = currentTranslate - prevTranslate
-
-if(movedBy < -100){
-nextReviewSlide()
-}
-else if(movedBy > 100){
-prevReviewSlide()
-}
-else{
-updateReviewSlide()
-}
-
-resetAutoSlide()
-
-})
-
-
-function animation(){
-
-reviewTrack.style.transition="none"
-
-reviewTrack.style.transform=`translateX(${currentTranslate}px)`
-
-if(dragging){
-requestAnimationFrame(animation)
-}
-
-}
-
-
-/* =================================
-ANIMAÇÃO SCROLL
-================================= */
-
-const reveals = document.querySelectorAll(".reveal-left, .reveal-right")
-
-const observer = new IntersectionObserver(entries => {
-
-entries.forEach(entry => {
-
-if(entry.isIntersecting){
-
-entry.target.classList.add("reveal-show")
-
-}
-
-})
-
-})
-
-reveals.forEach(el => observer.observe(el))
