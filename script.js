@@ -1,6 +1,41 @@
 // Ativa animacoes de reveal apenas quando JS esta rodando
 document.documentElement.classList.add(`js-ready`);
 
+// HEADER SCROLL COLLAPSE (mobile)
+var headerMobile = document.querySelector(`.header-mobile`);
+var lastScrollY = 0;
+var collapseThreshold = 60; // px de scroll para colapsar
+
+if (headerMobile) {
+function getHeaderHeight() {
+return headerMobile.getBoundingClientRect().height;
+}
+
+// Padding inicial
+document.body.style.paddingTop = getHeaderHeight() + `px`;
+
+window.addEventListener(`scroll`, function() {
+var scrollY = window.scrollY || window.pageYOffset;
+
+
+if (scrollY > collapseThreshold) {
+  headerMobile.classList.add('collapsed');
+  document.body.classList.add('header-collapsed');
+} else {
+  headerMobile.classList.remove('collapsed');
+  document.body.classList.remove('header-collapsed');
+}
+
+lastScrollY = scrollY;
+
+}, { passive: true });
+
+// Atualiza padding quando transição termina
+headerMobile.addEventListener(`transitionend`, function() {
+document.body.style.paddingTop = getHeaderHeight() + `px`;
+});
+}
+
 // NEXUS OFICINA - SCRIPT.JS
 
 // MENU MOBILE
