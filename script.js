@@ -285,6 +285,7 @@ revealElements.forEach(function(el) { revealObserver.observe(el); });
 } else {
 // Fallback: mostra tudo imediatamente se IntersectionObserver nao suportado
 revealElements.forEach(function(el) { el.classList.add(`revealed`); });
+
 }
 
 // WhatsApp: sobe quando chega no footer
@@ -301,3 +302,5 @@ window.addEventListener('scroll', function() {
     waFloat.style.bottom = '32px';
   }
 });
+
+
